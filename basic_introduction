@@ -1,0 +1,114 @@
+In this project, we will be using InceptionV3 which was originally trained to classify the imagenet data. We shall use this model to predict the class of an input image. We shall understand the different steps of preprocessing this input image as required by the network, before predicting the class of the image.
+Importing the necessary modules:
+Import numpy as np.
+
+import << your code comes here >> as << your code comes here >>
+Import tensorflow as tf.
+
+import << your code comes here >> as << your code comes here >>
+Import keras from tensorflow.
+
+from << your code comes here >>  import << your code comes here >>
+Import matplotlib.pyplot as plt.
+
+import << your code comes here >> as << your code comes here >>
+Set the random seed:
+
+np.random.seed(42)
+tf.random.set_seed(42)
+
+
+###Importing libraries code###
+import numpy as np
+import tensorflow as tf
+from tensorflow import keras
+import matplotlib.pyplot as plt
+np.random.seed(42)
+tf.random.set_seed(42)
+
+################################Getting the model and pre-trained weights#####################
+Import image from tensorflow.keras.preprocessing.
+
+from << your code comes here >> import << your code comes here >>
+Import InceptionV3 as myModel from tensorflow.keras.applications.inception_v3.
+
+from tensorflow.keras.applications.inception_v3 import << your code comes here >> as << your code comes here >>
+Import preprocess_input, decode_predictions from tensorflow.keras.applications.inception_v3.
+
+from tensorflow.keras.applications.inception_v3 import << your code comes here >>
+Now get the model model and include the weights of "imagenet" data classification task. We will be using this trained network to predict the class of our desired image.
+
+model = myModel(weights="imagenet")
+
+####Loading the image #######
+
+Mention the path to load the image we want to classify using the model.
+
+img_path = '/cxldata/dlcourse/lion.jpg'
+InceptionV3 needs inputs of size (299, 299). So load the image using image.load_img, pass the img_path and target_size=(299, 299) as the input arguments.
+
+img = << your code comes here >>(img_path, target_size=(299, 299))
+Now let us view the image we loaded. We shall convert the img to numpy array and display it using plt.imshow.
+
+<< your code comes here >>(np.asarray(img))
+
+CODE
+
+img_path = '/cxldata/dlcourse/lion.jpg'
+img = image.load_img(img_path,target_size=(299, 299))
+plt.imshow(np.asarray(img))
+
+
+
+#########################################
+
+Predicting the Class using Pre-Trained model
+Now that we have loaded the image and the pre-trained network, we shall preprocess the image, feed it to the neural network to predict the class of the image.
+
+Note::
+
+image.img_to_array : Converts a PIL Image instance to a Numpy array.
+
+tensorflow.keras.applications.inception_v3.preprocess_input : The images are converted from RGB to BGR, then each color channel is zero-centered with respect to the ImageNet dataset, without scaling.
+
+tensorflow.keras.applications.inception_v3.decode_predictions : Decodes the prediction into a list of tuples (class, description, probability)
+
+#########################################33
+CODE
+
+Predicting the Class using Pre-Trained model
+Now that we have loaded the image and the pre-trained network, we shall preprocess the image, feed it to the neural network to predict the class of the image.
+
+Note::
+
+image.img_to_array : Converts a PIL Image instance to a Numpy array.
+
+tensorflow.keras.applications.inception_v3.preprocess_input : The images are converted from RGB to BGR, then each color channel is zero-centered with respect to the ImageNet dataset, without scaling.
+
+tensorflow.keras.applications.inception_v3.decode_predictions : Decodes the prediction into a list of tuples (class, description, probability)
+
+INSTRUCTIONS
+Converts the PIL image img to np array x using image.img_to_array function.
+
+x = << your code comes here >>(img)
+The model expects to be fed with an array of images. So write as follows:
+
+x= np.array([x])
+Preprocess the x using preprocess_input.
+
+x =  << your code comes here >>(x)
+Predict the class probabilities of the input image x using model.predict.
+
+preds = << your code comes here>>(x)
+Decode the predictions and print the top 3 prediction probabilities as follow:
+
+print('Predicted:', decode_predictions(preds, top=3)[0])
+
+---------------------
+CODE
+
+x = image.img_to_array(img)
+x = np.array([x])
+x = preprocess_input(x)
+preds = model.predict(x)
+print('Predicted:',decode_predictions(preds, top=3)[0])
